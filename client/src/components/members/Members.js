@@ -9,11 +9,11 @@ class Members extends Component {
 
   render() {
     return (
-      
+      <div>
     );
   }
 }
 
-const mapStateToProps = ({ members }) => ({ membres });
+const mapStateToProps = ({ members }) => ({ members });
 
 export default connect(mapStateToProps, { fetchMembers })(Members);
