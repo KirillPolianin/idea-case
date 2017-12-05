@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchMembers } from '../../actions';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { fetchMembers } from '../../actions'
 
 class Members extends Component {
   componentDidMount() {
-    this.props.fetchMembers();
+    this.props.fetchMembers()
   }
 
   render() {
-    return (
-      <div>
-    );
+    return <div>a</div>
   }
 }
 
-const mapStateToProps = ({ members }) => ({ members });
+const mapStateToProps = ({ members }) => ({ members })
 
-export default connect(mapStateToProps, { fetchMembers })(Members);
+export default connect(mapStateToProps, { fetchMembers })(Members)
