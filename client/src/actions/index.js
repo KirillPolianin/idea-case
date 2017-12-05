@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const FETCH_MEMBERS = 'fetch_members';
+export const FETCH_MEMBER = 'fetch_member';
 export const CREATE_MEMBER = 'create_member';
 export const FETCH_IDEAS = 'fetch_ideas';
 export const SUBMIT_IDEA = 'submit_idea';
@@ -9,6 +10,12 @@ export const fetchMembers = () => async dispatch => {
   const res = await axios.get('http://localhost:5000/api/members');
 
   dispatch({ type: FETCH_MEMBERS, payload: res.data });
+};
+
+export const fetchMember = id => async dispatch => {
+  const res = await axios.get('http://localhost:5000/api/members/${id}');
+
+  dispatch({ type: FETCH_MEMBER, payload: res.data });
 };
 
 export const createMember = (values, history) => async dispatch => {
