@@ -5,7 +5,7 @@ import Main from './Main';
 import NewIdea from './ideas/NewIdea';
 import ShowIdea from './ideas/ShowIdea';
 import Members from './members/Members';
-import NewMember from './members/NewMember';
+import NewMember from './members/newMember/MemberForm';
 
 class App extends Component {
   render() {
