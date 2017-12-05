@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash'
-import { Link } from 'react-router-dom'
+import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 import { fetchMembers } from '../../actions';
 
@@ -20,7 +20,6 @@ class Members extends Component {
           </div>
         </div>
       );
-    })
     });
   }
 
