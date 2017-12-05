@@ -8,6 +8,7 @@ export default function(state = {}, action) {
     case FETCH_MEMBER:
       return state;
     //{ ...state, [action.payload.data[0].id]: action.payload.data[0] };
+
     default:
       return state;
   }

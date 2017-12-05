@@ -6,6 +6,13 @@ export const CREATE_MEMBER = 'create_member';
 export const UPDATE_MEMBER = 'update_member';
 export const FETCH_IDEAS = 'fetch_ideas';
 export const SUBMIT_IDEA = 'submit_idea';
+export const FETCH_CATEGORIES = 'fetch_categories';
+
+export const fetchCategories = () => async dispatch => {
+  const res = await axios.get('http://localhost:5000/api/categories');
+
+  dispatch({ type: FETCH_CATEGORIES, payload: res.data });
+};
 
 export const fetchMembers = () => async dispatch => {
   const res = await axios.get('http://localhost:5000/api/members');
