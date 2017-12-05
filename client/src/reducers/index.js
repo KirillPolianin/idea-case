@@ -8,3 +8,4 @@ export default combineReducers({
   ideas: ideasReducer,
   form: reduxForm
 });
+
