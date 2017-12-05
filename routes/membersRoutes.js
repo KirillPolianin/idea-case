@@ -17,10 +17,10 @@ module.exports = app => {
     try {
       const data = await db('member').insert(req.body);
 
-      res.status(200);
+      res.status(201);
       res.send(data);
     } catch (err) {
-      res.status(401);
+      res.status(400);
       res.send(err);
     }
   });

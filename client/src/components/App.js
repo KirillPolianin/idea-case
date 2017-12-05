@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Main from './Main';
 import NewIdea from './ideas/NewIdea';
 import ShowIdea from './ideas/ShowIdea';
 import Members from './members/Members';
 import NewMember from './members/newMember/MemberForm';
-
 
 class App extends Component {
   render() {
@@ -17,12 +16,12 @@ class App extends Component {
             <Route exact path="/" component={Main} />
             <Route exact path="/ideas/new" component={NewIdea} />
             <Route exact path="/ideas/:id" component={ShowIdea} />
-            <Route exact path="/members" components={Members} />
-            <Route exact path="/members/new" components={NewMember} />
+            <Route exact path="/members" component={Members} />
+            <Route exact path="/members/new" component={NewMember} />
           </Switch>
         </div>
       </BrowserRouter>
-    )
+    );
   }
 }
-export default App
+export default App;
