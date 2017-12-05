@@ -38,4 +38,18 @@ module.exports = app => {
       res.send(err);
     }
   });
+
+  app.put('/api/members/:id', async (req, res) => {
+    try {
+      const data = await db('member')
+        .where({ id: req.params.id })
+        .insert(req.body);
+
+      res.status(200);
+      res.send(data);
+    } catch (err) {
+      res.status(400);
+      res.send(err);
+    }
+  });
 };

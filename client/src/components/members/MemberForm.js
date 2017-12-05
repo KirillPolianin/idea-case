@@ -64,11 +64,7 @@ function validate(values) {
   return errors;
 }
 
-function mapStateToProps(state) {
-  return { formValues: state.form.memberForm.values };
-}
-
 export default reduxForm({
   validate,
   form: 'memberForm'
-})(connect(mapStateToProps, { createMember })(withRouter(MemberForm)));
+})(connect(null, { createMember })(withRouter(MemberForm)));
