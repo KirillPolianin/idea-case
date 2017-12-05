@@ -1,23 +1,36 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { newIdeaSubmit } from '../../actions';
+import { newIdeaSubmit, fetchCategories } from '../../actions';
 import { reduxForm, Field } from 'redux-form';
 import { Link, withRouter } from 'react-router-dom';
 import FormField from './FormField';
 import ideaFields from './ideaFields';
 
-const FIELDS = [
-  { label: 'Title', name: 'title', type: 'text' },
-  { label: 'Description', name: 'description', type: 'text' },
-  { label: 'Budget', name: 'budget', type: 'text' },
-  { label: 'People needed', name: 'peopleNeeded', type: 'text' },
-  { label: 'Enable comments?', name: 'isReadyForComments', type: 'radio' }
-];
-
 class NewIdea extends Component {
-  renderFields = () =>
-    _.map(FIELDS, ({ label, name, type }) => {
+  componentDidMount() {
+    this.props.fetchCategories();
+  }
+
+  renderFields = () => {
+    const FIELDS = [
+      { label: 'Title', name: 'title', type: 'text' },
+      { label: 'Description', name: 'description', type: 'text' },
+      { label: 'Budget', name: 'budget', type: 'text' },
+      { label: 'People needed', name: 'peopleNeeded', type: 'text' },
+      { label: 'Enable comments?', name: 'isReadyForComments', type: 'radio' },
+      {
+        label: 'Categories',
+        name: 'categories',
+        type: 'options',
+        data: this.props.categories
+      }
+    ];
+
+    const options = data =>
+      data.map(({ id, title }) => <option value={id}>{title}</option>);
+
+    return _.map(FIELDS, ({ label, name, type, data }) => {
       switch (type) {
         case 'text':
         case 'email':
@@ -33,31 +46,47 @@ class NewIdea extends Component {
         case 'radio':
           return (
             <div>
+              <label>Sex</label>
+              <div>
+                <p>
+                  <label>
+                    <Field
+                      name="sex"
+                      component="input"
+                      type="radio"
+                      value="male"
+                    />
+                    Male
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <Field
+                      name="sex"
+                      component="input"
+                      type="radio"
+                      value="female"
+                    />
+                    Female
+                  </label>
+                </p>
+              </div>
+            </div>
+          );
+        case 'options':
+          return (
+            <div>
               <label>{label}</label>
               <div>
-                <label>
-                  <Field
-                    name="isReadyForComments"
-                    component="input"
-                    type="radio"
-                    value="1"
-                  />
-                  Yes
-                </label>
-                <label>
-                  <Field
-                    name="isReadyForComments"
-                    component="input"
-                    type="radio"
-                    value="0"
-                  />
-                  No
-                </label>
+                <Field name={name} component="select">
+                  {options(data)}
+                </Field>
               </div>
             </div>
           );
       }
     });
+  };
 
   onSubmit = values => this.props.newIdeaSubmit(values, this.props.history);
 
@@ -66,7 +95,6 @@ class NewIdea extends Component {
       <div>
         <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
           {this.renderFields()}
-
           <Link to="/" className="red btn-flat white-text">
             Cancel
           </Link>
@@ -97,7 +125,13 @@ const validate = values => {
   return errors;
 };
 
+const mapStateToProps = ({ categories }) => ({ categories });
+
 export default reduxForm({
   validate,
   form: 'ideasForm'
-})(connect(null, { newIdeaSubmit })(withRouter(NewIdea)));
+})(
+  connect(mapStateToProps, { newIdeaSubmit, fetchCategories })(
+    withRouter(NewIdea)
+  )
+);
