@@ -46,28 +46,28 @@ class NewIdea extends Component {
         case 'radio':
           return (
             <div>
-              <label>Sex</label>
+              <label>{label}</label>
               <div>
                 <p>
                   <label>
                     <Field
-                      name="sex"
+                      name={name}
                       component="input"
                       type="radio"
-                      value="male"
+                      value={1}
                     />
-                    Male
+                    Yes
                   </label>
                 </p>
                 <p>
                   <label>
                     <Field
-                      name="sex"
+                      name={name}
                       component="input"
                       type="radio"
-                      value="female"
+                      value={0}
                     />
-                    Female
+                    No
                   </label>
                 </p>
               </div>
