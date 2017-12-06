@@ -35,7 +35,6 @@ class Members extends Component {
   render() {
     return (
       <div>
-        <h2>Members</h2>
         {this.renderMembers()}
         <div className="fixed-action-btn">
           <Link to="/members/new" className="btn-floating btn-large blue">

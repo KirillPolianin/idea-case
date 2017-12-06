@@ -6,12 +6,14 @@ import IdeaFormPage from './ideas/IdeaFormPage';
 import ShowIdea from './ideas/ShowIdea';
 import Members from './members/Members';
 import MemberFormPage from './members/MemberFormPage';
+import Header from './Header';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div className="container">
+          <Header />
           <Switch>
             <Route exact path="/" component={Main} />
             <Route exact path="/ideas/new" component={IdeaFormPage} />
