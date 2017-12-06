@@ -4,7 +4,7 @@ const knex = require('knex')({
     host: 'localhost',
     database: 'idea_case',
     user: 'root',
-    password: 'password1'
+    password: '14881488'
   }
 });
 

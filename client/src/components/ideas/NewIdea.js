@@ -117,12 +117,8 @@ const validate = values => {
       errors[name] = 'You need to write something';
     }
 
-    if (type === 'email') {
-      errors[name] = validateEmail(values[name] || '');
-    }
+    return errors;
   });
-
-  return errors;
 };
 
 const mapStateToProps = ({ categories }) => ({ categories });
