@@ -40,7 +40,6 @@ module.exports = app => {
   });
 
   app.put('/api/members/:id', async (req, res) => {
-    console.log(req.body);
     try {
       await db('member')
         .where({ id: req.params.id })
@@ -54,7 +53,6 @@ module.exports = app => {
     }
   });
 
-  //doesn't work right now, SQL scripts must be edited to enable CASCADE deleting
   app.delete('/api/members/:id', async (req, res) => {
     try {
       await db('member')
