@@ -25,8 +25,8 @@ app.use(bodyParser.json());
 //app.use(allowCrossDomain)
 
 require('./routes/ideasRoutes')(app);
-require('./routes/categoriesRoutes')(app);
-require('./routes/membersRoutes')(app);
+require('./routes')(app, 'Category', 'categories');
+require('./routes')(app, 'Member', 'members');
 require('./routes/commentsRoutes')(app);
 
 const PORT = process.env.PORT || 5000;
