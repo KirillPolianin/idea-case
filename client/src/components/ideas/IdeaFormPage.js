@@ -14,7 +14,6 @@ import IdeaForm from './IdeaForm';
 class IdeaFormPage extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
-    console.log(id);
     if (id) {
       this.props.fetchIdea(id);
     } else {
@@ -25,6 +24,7 @@ class IdeaFormPage extends Component {
   }
 
   submit = idea => {
+    console.log(idea);
     if (!idea.id) {
       return this.props.createIdea(idea, this.props.history);
     } else {

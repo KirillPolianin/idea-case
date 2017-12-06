@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
@@ -21,30 +22,72 @@ class IdeaForm extends Component {
       { label: 'Enable comments?', name: 'isReadyForComments', type: 'radio' },
       {
         label: 'Categories',
-        name: 'categories',
+        name: 'categoryId',
         type: 'options',
         data: this.props.categories
       }
     ];
 
-    return (
-      <div>
-        <Field
-          key="userName"
-          component={FormField}
-          type="text"
-          label="Username"
-          name="userName"
-        />
-        <Field
-          key="email"
-          component={FormField}
-          type="email"
-          label="Email"
-          name="email"
-        />
-      </div>
-    );
+    const options = data =>
+      _.map(data, ({ id, title }) => <option value={id}>{title}</option>);
+
+    return _.map(FIELDS, ({ label, name, type, data }) => {
+      switch (type) {
+        case 'text':
+        case 'email':
+          return (
+            <Field
+              key={name}
+              component={FormField}
+              type="text"
+              label={label}
+              name={name}
+            />
+          );
+        case 'radio':
+          return (
+            <div>
+              <label>{label}</label>
+              <div>
+                <p>
+                  <label>
+                    <Field
+                      name={name}
+                      component="input"
+                      type="radio"
+                      value="1"
+                    />
+                    Yes
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <Field
+                      name={name}
+                      component="input"
+                      type="radio"
+                      value="0"
+                    />
+                    No
+                  </label>
+                </p>
+              </div>
+            </div>
+          );
+        case 'options':
+          return (
+            <div>
+              <label>{label}</label>
+              <div>
+                <Field name={name} component="select">
+                  <option />
+                  {options(data)}
+                </Field>
+              </div>
+            </div>
+          );
+      }
+    });
   }
 
   render() {
