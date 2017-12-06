@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 //app.use(allowCrossDomain)
 
-require('./routes/ideasRoutes')(app);
+require('./routes')(app, 'Idea', 'ideas');
 require('./routes')(app, 'Category', 'categories');
 require('./routes')(app, 'Member', 'members');
 require('./routes/commentsRoutes')(app);

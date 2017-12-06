@@ -55,7 +55,7 @@ class IdeaForm extends Component {
                       name={name}
                       component="input"
                       type="radio"
-                      value="1"
+                      value={1}
                     />
                     Yes
                   </label>
@@ -66,7 +66,7 @@ class IdeaForm extends Component {
                       name={name}
                       component="input"
                       type="radio"
-                      value="0"
+                      value={0}
                     />
                     No
                   </label>

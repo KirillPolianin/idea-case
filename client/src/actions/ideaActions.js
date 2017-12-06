@@ -24,7 +24,11 @@ export const fetchIdea = id => async dispatch => {
 };
 
 export const createIdea = (idea, history) => async dispatch => {
-  const res = await axios.post('http://localhost:5000/api/ideas', idea);
+  const res = await axios.post('http://localhost:5000/api/ideas', {
+    ...idea,
+    creationDate: new Date(),
+    lastModified: new Date()
+  });
 
   history.push('/ideas');
   dispatch({ type: CREATE_IDEA, payload: res.data });
