@@ -17,8 +17,8 @@ class IdeaForm extends Component {
     const FIELDS = [
       { label: 'Title', name: 'title', type: 'text' },
       { label: 'Description', name: 'description', type: 'text' },
-      { label: 'Budget', name: 'budget', type: 'text' },
-      { label: 'People needed', name: 'peopleNeeded', type: 'text' },
+      { label: 'Budget', name: 'budget', type: 'number' },
+      { label: 'People needed', name: 'peopleNeeded', type: 'number' },
       { label: 'Enable comments?', name: 'isReadyForComments', type: 'radio' },
       {
         label: 'Categories',
@@ -34,12 +34,13 @@ class IdeaForm extends Component {
     return _.map(FIELDS, ({ label, name, type, data }) => {
       switch (type) {
         case 'text':
+        case 'number':
         case 'email':
           return (
             <Field
               key={name}
               component={FormField}
-              type="text"
+              type={type}
               label={label}
               name={name}
             />
