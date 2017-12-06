@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchIdeas } from '../../actions/ideaActions';
-import Comments from './Comments';
+import Comments from '../comments/Comments';
 
 class Ideas extends Component {
   componentDidMount() {
@@ -29,7 +29,8 @@ class Ideas extends Component {
             <Link to={`/ideas/update/${idea.id}`}>Edit</Link>
             <button
               className="red darken-3 btn"
-              onClick={() => this.props.deleteIdea(idea.id)}>
+              onClick={() => this.props.deleteIdea(idea.id)}
+            >
               Delete
             </button>
           </div>
