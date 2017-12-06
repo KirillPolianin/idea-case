@@ -5,7 +5,7 @@ import membersReducer from './membersReducer';
 import categoriesReducer from './categoriesReducer';
 
 export default combineReducers({
-  members: membersReducer,
+  memberStore: membersReducer,
   ideas: ideasReducer,
   categories: categoriesReducer,
   form: reduxForm

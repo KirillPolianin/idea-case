@@ -5,8 +5,7 @@ import Main from './Main';
 import NewIdea from './ideas/NewIdea';
 import ShowIdea from './ideas/ShowIdea';
 import Members from './members/Members';
-import NewMember from './members/MemberForm';
-import MemberUpdate from './members/MemberUpdate';
+import MemberFormPage from './members/MemberFormPage';
 
 class App extends Component {
   render() {
@@ -17,9 +16,13 @@ class App extends Component {
             <Route exact path="/" component={Main} />
             <Route exact path="/ideas/new" component={NewIdea} />
             <Route exact path="/ideas/:id" component={ShowIdea} />
+            <Route exact path="/members/new" component={MemberFormPage} />
             <Route exact path="/members" component={Members} />
-            <Route exact path="/members/new" component={NewMember} />
-            <Route exact path="/members/update/:id" component={MemberUpdate} />
+            <Route
+              exact
+              path="/members/update/:id"
+              component={MemberFormPage}
+            />
           </Switch>
         </div>
       </BrowserRouter>
