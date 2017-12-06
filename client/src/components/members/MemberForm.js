@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import { reduxForm, Field } from 'redux-form';
-import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 
 import MemberField from './MemberField';
-import { createMember } from '../../actions';
 
 class MemberForm extends Component {
+  componentWillReceiveProps = nextProps => {
+    const { member } = nextProps;
+    if (member.id !== this.props.member.id) {
+      this.props.initialize(member);
+    }
+  };
+
   renderFields() {
     return (
       <div>
@@ -28,12 +33,15 @@ class MemberForm extends Component {
     );
   }
 
-  onSubmit = values => this.props.createMember(values, this.props.history);
-
   render() {
+    const { handleSubmit } = this.props;
+
     return (
       <div>
-        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        <h3 style={{ marginTop: '1em' }}>
+          {this.props.member.id ? 'Edit Member' : 'Add New Member'}
+        </h3>
+        <form onSubmit={handleSubmit}>
           {this.renderFields()}
           <Link to="/members" className="red btn-flat white-text">
             Cancel
@@ -67,4 +75,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: 'memberForm'
-})(connect(null, { createMember })(withRouter(MemberForm)));
+})(MemberForm);
