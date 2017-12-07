@@ -15,8 +15,12 @@ class Categories extends Component {
       return (
         <div className="card blue-grey darken-1" key={category.id}>
           <div className="card-content white-text">
-            <span className="card-title">{category.userName}</span>
-            <p>{category.email}</p>
+            <span className="card-title">{category.title}</span>
+            <p>
+              Budget:{' '}
+              {!category.budgetLimit ? 'Not specified' : category.budgetLimit}
+            </p>
+            <p>Active: {category.isActive === 1 ? 'Yes' : 'No'}</p>
           </div>
           <div className="card-action">
             <Link to={`/categories/update/${category.id}`}>Edit</Link>
