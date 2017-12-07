@@ -17,7 +17,7 @@ class Categories extends Component {
           <div className="card-content white-text">
             <span className="card-title">{category.title}</span>
             <p>
-              Budget:{' '}
+              Budget hahah:{' '}
               {!category.budgetLimit ? 'Not specified' : category.budgetLimit}
             </p>
             <p>Active: {category.isActive === 1 ? 'Yes' : 'No'}</p>
