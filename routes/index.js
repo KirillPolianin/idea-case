@@ -1,23 +1,11 @@
 const db = require('../database');
 
-module.exports = app => {
-  app.get('/api/members', async (req, res) => {
+module.exports = (app, table, plural) => {
+  app.get(`/api/${plural}`, async (req, res) => {
     try {
-      const members = await db.select('*').from('member');
+      const data = await db.select('*').from(table);
 
       res.status(200);
-      res.json(members);
-    } catch (err) {
-      res.status(400);
-      res.send(err);
-    }
-  });
-
-  app.post('/api/members', async (req, res) => {
-    try {
-      const data = await db('member').insert(req.body);
-
-      res.status(201);
       res.json(data);
     } catch (err) {
       res.status(400);
@@ -25,42 +13,54 @@ module.exports = app => {
     }
   });
 
-  app.get('/api/members/:id', async (req, res) => {
+  app.post(`/api/${plural}`, async (req, res) => {
     try {
-      const member = await db('member')
+      await db(table).insert(req.body);
+
+      res.status(201);
+      res.json({ message: `${table} Created!` });
+    } catch (err) {
+      res.status(400);
+      res.send(err);
+    }
+  });
+
+  app.get(`/api/${plural}/:id`, async (req, res) => {
+    try {
+      const data = await db(table)
         .where({ id: req.params.id })
         .select('*');
 
       res.status(200);
-      res.json(member[0]);
+      res.json(data[0]);
     } catch (err) {
       res.status(400);
       res.send(err);
     }
   });
 
-  app.put('/api/members/:id', async (req, res) => {
+  app.put(`/api/${plural}/:id`, async (req, res) => {
     try {
-      await db('member')
+      await db(table)
         .where({ id: req.params.id })
         .update(req.body);
 
       res.status(200);
-      res.json({ message: 'Member updated!' });
+      res.json({ message: `${table} updated!` });
     } catch (err) {
       res.status(400);
       res.send(err);
     }
   });
 
-  app.delete('/api/members/:id', async (req, res) => {
+  app.delete(`/api/${plural}/:id`, async (req, res) => {
     try {
-      await db('member')
+      await db(table)
         .where({ id: req.params.id })
         .del();
 
       res.status(200);
-      res.json({ message: 'Member successfully deleted!' });
+      res.json({ message: `${table} successfully deleted!` });
     } catch (err) {
       res.status(400);
       res.send(err);
