@@ -9,6 +9,8 @@ export default combineReducers({
   memberStore: membersReducer,
   ideaStore: ideasReducer,
   categoryStore: categoriesReducer,
+
   comments: commentsReducer,
+
   form: reduxForm
 });
