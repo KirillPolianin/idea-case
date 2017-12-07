@@ -20,6 +20,10 @@ class MemberFormPage extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.newMember();
+  }
+
   submit = member => {
     if (!member.id) {
       return this.props.createMember(member, this.props.history);

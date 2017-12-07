@@ -7,6 +7,6 @@ import categoriesReducer from './categoriesReducer';
 export default combineReducers({
   memberStore: membersReducer,
   ideaStore: ideasReducer,
-  categories: categoriesReducer,
+  categoryStore: categoriesReducer,
   form: reduxForm
 });
