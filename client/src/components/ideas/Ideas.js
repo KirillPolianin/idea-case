@@ -15,11 +15,13 @@ class Ideas extends Component {
       return (
         <div className="card" key={idea.id}>
           <div className="card-content">
-            <span className="card-title">{idea.title}</span>
-            <p>{idea.description}</p>
-            <p className="right">
-              Sent On: {new Date(idea.creationDate).toLocaleDateString()}
-            </p>
+            <Link to={`/ideas/${idea.id}`}>
+              <span className="card-title">{idea.title}</span>
+              <p>{idea.description}</p>
+              <p className="right">
+                Sent On: {new Date(idea.creationDate).toLocaleDateString()}
+              </p>
+            </Link>
           </div>
           <div className="card-action">
             <a>Created by: User</a>
@@ -29,8 +31,7 @@ class Ideas extends Component {
             <Link to={`/ideas/update/${idea.id}`}>Edit</Link>
             <button
               className="red darken-3 btn"
-              onClick={() => this.props.deleteIdea(idea.id)}
-            >
+              onClick={() => this.props.deleteIdea(idea.id)}>
               Delete
             </button>
           </div>
