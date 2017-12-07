@@ -6,6 +6,8 @@ import IdeaFormPage from './ideas/IdeaFormPage';
 import ShowIdea from './ideas/ShowIdea';
 import Members from './members/Members';
 import MemberFormPage from './members/MemberFormPage';
+import Categories from './categories/Categories';
+import CategoryFormPage from './categories/CategoryFormPage';
 import Header from './Header';
 
 class App extends Component {
@@ -21,6 +23,13 @@ class App extends Component {
             <Route exact path="/ideas/update/:id" component={IdeaFormPage} />
             <Route exact path="/members/new" component={MemberFormPage} />
             <Route exact path="/members" component={Members} />
+            <Route
+              exact
+              path="/categories/update/:id"
+              component={CategoryFormPage}
+            />
+            <Route exact path="/categories/new" component={CategoryFormPage} />
+            <Route exact path="/categories" component={Categories} />
             <Route
               exact
               path="/members/update/:id"
