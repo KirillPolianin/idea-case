@@ -1,34 +1,34 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchIdea, deleteIdea } from '../../actions/ideaActions';
-import { fetchComments } from '../../actions/commentActions';
-import { Link } from 'react-router-dom';
-import Comments from '../comments/Comments';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { fetchIdea, deleteIdea } from '../../actions/ideaActions'
+import { fetchComments } from '../../actions/commentActions'
+import { Link } from 'react-router-dom'
+import Comments from '../comments/Comments'
 
 class ShowIdea extends Component {
   componentDidMount() {
-    const { id } = this.props.match.params;
-    this.props.fetchIdea(id);
-
-    this.props.fetchComments(this.props.idea.id);
+    const { id } = this.props.match.params
+    this.props.fetchIdea(id)
   }
 
   onDeleteClick = () => {
-    const { id } = this.props.match.params;
+    const { id } = this.props.match.params
     this.props.deletePost(id, () => {
-      this.props.history.push('/');
-    });
-  };
+      this.props.history.push('/')
+    })
+  }
 
-  renderComments = () =>
-    this.props.idea.isReadyForComments ? (
-      <Comments comments={this.props.comments} />
+  renderComments = () => {
+    const { idea } = this.props
+    return idea.isReadyForComments ? (
+      <Comments comments={idea.comments} />
     ) : (
-      <h5>Comments are disabled</h5>
-    );
+      <p>Comments are disabled</p>
+    )
+  }
 
   render() {
-    const { idea } = this.props;
+    const { idea } = this.props
 
     return (
       <div>
@@ -41,9 +41,9 @@ class ShowIdea extends Component {
             </p>
           </div>
           <div className="card-action">
-            <Link to="/" className="red btn-flat white-text">
+            <button className="btn" onClick={this.props.history.goBack}>
               Back
-            </Link>
+            </button>
             <a>Created by: User</a>
             <Link to={`/ideas/update/${idea.id}`}>Edit</Link>
             <button
@@ -55,16 +55,15 @@ class ShowIdea extends Component {
         </div>
         {this.renderComments()}
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => ({
-  idea: state.ideaStore.idea,
-  comments: state.comments
-});
+  idea: state.ideaStore.idea
+})
 export default connect(mapStateToProps, {
   fetchIdea,
   deleteIdea,
   fetchComments
-})(ShowIdea);
+})(ShowIdea)

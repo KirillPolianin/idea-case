@@ -1,14 +1,16 @@
-const db = require('../database');
+const db = require('../database')
 
 module.exports = app => {
-  app.get('/api/comments', async (req, res) => {
-    const data = await db.select().from('comment');
+  app.get('/comments', async (req, res) => {
+    const data = await db('comment')
+      .where({ ideaId: req.body })
+      .select('*')
 
-    res.status(200);
-    res.send(data);
-  });
+    res.status(200)
+    res.send(data)
+  })
 
   app.post('/api/comments', async (req, res) => {
-    const comment = await db('comment').insert(req.body);
-  });
-};
+    const comment = await db('comment').insert(req.body)
+  })
+}
