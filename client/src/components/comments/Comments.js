@@ -1,7 +1,31 @@
-import React from 'react';
+import React from 'react'
+import _ from 'lodash'
+import CommentForm from './CommentForm'
 
 const Comments = ({ comments }) => {
-  return <h5>comments</h5>;
-};
+  const renderComments = () => {
+    if (comments.length) {
+      const list = _.map(comments, comment => (
+        <li className="collection-item" key={comment.id}>
+          <div className="right">
+            {new Date(comment.commentTimeStamp).toLocaleDateString()}
+          </div>
+          <div style={{ fontWeight: 'bold' }}>{comment.userName}</div>
+          <div>{comment.commentLine}</div>
+        </li>
+      ))
+      return <ul className="collection">{list}</ul>
+    } else {
+      return <p>No comments</p>
+    }
+  }
 
-export default Comments;
+  return (
+    <div>
+      <CommentForm />
+      {renderComments()}
+    </div>
+  )
+}
+
+export default Comments
