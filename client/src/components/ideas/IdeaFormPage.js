@@ -27,6 +27,10 @@ class IdeaFormPage extends Component {
     this.props.newIdea();
   }
 
+  componentWillUnmount() {
+    this.props.newIdea()
+  }
+
   submit = idea => {
     if (!idea.id) {
       return this.props.createIdea(idea, this.props.history);
