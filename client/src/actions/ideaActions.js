@@ -1,51 +1,64 @@
-import axios from 'axios'
+import axios from 'axios';
+import _ from 'lodash';
 
-export const FETCH_IDEAS = 'fetch_ideas'
-export const FETCH_IDEA = 'fetch_idea'
-export const CREATE_IDEA = 'create_idea'
-export const UPDATE_IDEA = 'update_idea'
-export const NEW_IDEA = 'new_idea'
-export const DELETE_IDEA = 'delete_idea'
+export const FETCH_IDEAS = 'fetch_ideas';
+export const FETCH_IDEA = 'fetch_idea';
+export const CREATE_IDEA = 'create_idea';
+export const UPDATE_IDEA = 'update_idea';
+export const NEW_IDEA = 'new_idea';
+export const DELETE_IDEA = 'delete_idea';
 
 export const newIdea = () => dispatch => {
-  dispatch({ type: NEW_IDEA })
-}
+  dispatch({ type: NEW_IDEA });
+};
 
 export const fetchIdeas = () => async dispatch => {
-  const res = await axios.get('http://localhost:5000/api/ideas')
+  const res = await axios.get('http://localhost:5000/api/ideas');
 
-  dispatch({ type: FETCH_IDEAS, payload: res.data })
-}
+  dispatch({ type: FETCH_IDEAS, payload: res.data });
+};
 
 export const fetchIdea = id => async dispatch => {
-  const res = await axios.get(`http://localhost:5000/ideas/${id}`)
+  const res = await axios.get(`http://localhost:5000/ideas/${id}`);
 
-  dispatch({ type: FETCH_IDEA, payload: res.data })
-}
+  dispatch({ type: FETCH_IDEA, payload: res.data });
+};
 
-export const createIdea = (idea, history) => async dispatch => {
-  const res = await axios.post('http://localhost:5000/api/ideas', {
-    ...idea,
-    creationDate: new Date(),
-    lastModified: new Date()
-  })
+export const fetchIdeaUpdate = id => async dispatch => {
+  const res = await axios.get(`http://localhost:5000/api/ideas/${id}`);
 
-  history.push('/ideas')
-  dispatch({ type: CREATE_IDEA, payload: res.data })
-}
+  const payload = _.omit(res.data, 'lastModified');
+
+  dispatch({ type: FETCH_IDEA, payload });
+};
+
+export const createIdea = (values, history) => async dispatch => {
+  const today = new Date();
+  const creationDate =
+    today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+  const idea = {
+    ...values,
+    creationDate: creationDate
+  };
+  const res = await axios.post('http://localhost:5000/api/ideas', idea);
+
+  history.push('/ideas');
+  dispatch({ type: CREATE_IDEA, payload: res.data });
+};
 
 export const updateIdea = (idea, history) => async dispatch => {
   const res = await axios.put(
     `http://localhost:5000/api/ideas/${idea.id}`,
     idea
-  )
+  );
 
-  history.push('/ideas')
-  dispatch({ type: UPDATE_IDEA, payload: res.data })
-}
+  history.push('/ideas');
+  dispatch({ type: UPDATE_IDEA, payload: res.data });
+};
 
 export const deleteIdea = id => async dispatch => {
-  await axios.delete(`http://localhost:5000/api/ideas/${id}`)
+  await axios.delete(`http://localhost:5000/api/ideas/${id}`);
 
-  await dispatch({ type: DELETE_IDEA, payload: id })
-}
+  await dispatch({ type: DELETE_IDEA, payload: id });
+};

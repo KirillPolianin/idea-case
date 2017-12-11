@@ -4,7 +4,9 @@ const knex = require('knex')({
     host: 'localhost',
     database: 'idea_case',
     user: 'root',
-    password: '14881488'
+    password: 'password1',
+    timezone: 'UTC',
+    dateStrings: true
   }
 });
 
