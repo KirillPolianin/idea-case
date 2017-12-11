@@ -1,17 +1,17 @@
-import _ from 'lodash';
-import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { Link } from 'react-router-dom';
+import _ from 'lodash'
+import React, { Component } from 'react'
+import { Field, reduxForm } from 'redux-form'
+import { Link } from 'react-router-dom'
 
-import FormField from '../utils/FormField';
+import FormField from '../utils/FormField'
 
 class IdeaForm extends Component {
   componentWillReceiveProps = nextProps => {
-    const { idea } = nextProps;
+    const { idea } = nextProps
     if (idea.id !== this.props.idea.id) {
-      this.props.initialize(idea);
+      this.props.initialize(idea)
     }
-  };
+  }
 
   renderFields() {
     const FIELDS = [
@@ -26,10 +26,10 @@ class IdeaForm extends Component {
         type: 'options',
         data: this.props.categories
       }
-    ];
+    ]
 
     const options = data =>
-      _.map(data, ({ id, title }) => <option value={id}>{title}</option>);
+      _.map(data, ({ id, title }) => <option value={id}>{title}</option>)
 
     return _.map(FIELDS, ({ label, name, type, data }) => {
       switch (type) {
@@ -44,7 +44,7 @@ class IdeaForm extends Component {
               label={label}
               name={name}
             />
-          );
+          )
         case 'radio':
           return (
             <div>
@@ -53,6 +53,7 @@ class IdeaForm extends Component {
                 <p>
                   <label>
                     <Field
+                      key={name}
                       name={name}
                       component="input"
                       type="radio"
@@ -64,6 +65,7 @@ class IdeaForm extends Component {
                 <p>
                   <label>
                     <Field
+                      key={name}
                       name={name}
                       component="input"
                       type="radio"
@@ -74,25 +76,25 @@ class IdeaForm extends Component {
                 </p>
               </div>
             </div>
-          );
+          )
         case 'options':
           return (
             <div>
               <label>{label}</label>
               <div>
-                <Field name={name} component="select">
+                <Field name={name} component="select" key={name}>
                   <option />
                   {options(data)}
                 </Field>
               </div>
             </div>
-          );
+          )
       }
-    });
+    })
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit } = this.props
 
     return (
       <div>
@@ -110,27 +112,27 @@ class IdeaForm extends Component {
           </button>
         </form>
       </div>
-    );
+    )
   }
 }
 
 function validate(values) {
-  const errors = {};
+  const errors = {}
 
   if (!values.email) {
-    errors.email = 'Required';
+    errors.email = 'Required'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
+    errors.email = 'Invalid email address'
   }
 
   if (!values.userName) {
-    errors.userName = 'This line is required!';
+    errors.userName = 'This line is required!'
   }
 
-  return errors;
+  return errors
 }
 
 export default reduxForm({
   validate,
   form: 'ideaForm'
-})(IdeaForm);
+})(IdeaForm)

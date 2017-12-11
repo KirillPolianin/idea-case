@@ -4,3 +4,8 @@
   opacity: 1 !important;
   left: 18px !important;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

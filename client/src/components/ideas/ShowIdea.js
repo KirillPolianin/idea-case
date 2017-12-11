@@ -48,7 +48,6 @@ class ShowIdea extends Component {
             <button className="btn" onClick={this.props.history.goBack}>
               Back
             </button>
-            <a>Created by: User</a>
             <Link to={`/ideas/update/${idea.id}`}>Edit</Link>
             <button
               className="red darken-3 btn"

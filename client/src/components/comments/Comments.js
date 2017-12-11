@@ -4,9 +4,9 @@ import CommentForm from './CommentForm';
 
 const Comments = ({ comments }) => {
   const renderComments = () => {
-    if (comments === {}) {
-      const list = _.map(comments, comment => (
-        <li className="collection-item" key={comment.id}>
+    if (comments.length) {
+      const list = _.map(comments, (comment, index) => (
+        <li className="collection-item" key={index}>
           <div className="right">
             {new Date(comment.commentTimeStamp).toLocaleDateString()}
           </div>

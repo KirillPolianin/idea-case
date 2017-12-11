@@ -24,8 +24,6 @@ class Ideas extends Component {
             </Link>
           </div>
           <div className="card-action">
-            <a>Created by: User</a>
-            <a>how many comments</a>
             <Link to={`/ideas/update/${idea.id}`}>Edit</Link>
             <button
               className="red darken-3 btn"
