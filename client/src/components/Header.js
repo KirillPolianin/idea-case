@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Header extends Component {
   render() {
     return (
       <nav>
-        <div className="nav-wrapper">
+        <div className="nav-wrapper grid">
           <Link to="/" className="brand-logo center">
             Idea Case App
           </Link>
@@ -22,8 +22,8 @@ class Header extends Component {
           </ul>
         </div>
       </nav>
-    );
+    )
   }
 }
 
-export default Header;
+export default Header
