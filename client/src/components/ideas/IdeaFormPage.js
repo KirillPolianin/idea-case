@@ -8,7 +8,7 @@ import {
   updateIdea,
   fetchIdeaUpdate
 } from '../../actions/ideaActions';
-import { fetchCategories } from '../../actions';
+import { fetchCategories } from '../../actions/categoryActions';
 import IdeaForm from './IdeaForm';
 
 class IdeaFormPage extends Component {
@@ -25,10 +25,6 @@ class IdeaFormPage extends Component {
 
   componentWillUnmount() {
     this.props.newIdea();
-  }
-
-  componentWillUnmount() {
-    this.props.newIdea()
   }
 
   submit = idea => {

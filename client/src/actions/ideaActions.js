@@ -43,7 +43,7 @@ export const createIdea = (values, history) => async dispatch => {
   };
   const res = await axios.post('http://localhost:5000/api/ideas', idea);
 
-  history.push('/ideas');
+  history.push('/');
   dispatch({ type: CREATE_IDEA, payload: res.data });
 };
 
@@ -53,12 +53,16 @@ export const updateIdea = (idea, history) => async dispatch => {
     idea
   );
 
-  history.push('/ideas');
+  history.push('/');
   dispatch({ type: UPDATE_IDEA, payload: res.data });
 };
 
-export const deleteIdea = id => async dispatch => {
+export const deleteIdea = (id, history) => async dispatch => {
   await axios.delete(`http://localhost:5000/api/ideas/${id}`);
+
+  if (history) {
+    history.push('/');
+  }
 
   await dispatch({ type: DELETE_IDEA, payload: id });
 };
