@@ -30,7 +30,6 @@ module.exports = (app, table, plural) => {
       const data = await db(table)
         .where({ id: req.params.id })
         .select('*');
-      console.log(data);
 
       res.status(200);
       res.json(data[0]);

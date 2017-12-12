@@ -4,7 +4,7 @@ import CommentForm from './CommentForm';
 
 const Comments = ({ comments }) => {
   const renderComments = () => {
-    if (comments.length) {
+    if (Object.keys(comments).length) {
       const list = _.map(comments, (comment, index) => (
         <li className="collection-item" key={index}>
           <div className="right">
