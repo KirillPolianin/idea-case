@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ROOT_URL } from './rootUrl';
 
 export const FETCH_CATEGORIES = 'fetch_categories';
 export const FETCH_CATEGORY = 'fetch_category';
@@ -12,22 +13,19 @@ export const newCategory = () => dispatch => {
 };
 
 export const fetchCategories = () => async dispatch => {
-  const res = await axios.get('http://localhost:5000/api/categories');
+  const res = await axios.get(`${ROOT_URL}/api/categories`);
 
   dispatch({ type: FETCH_CATEGORIES, payload: res.data });
 };
 
 export const fetchCategory = id => async dispatch => {
-  const res = await axios.get(`http://localhost:5000/api/categories/${id}`);
+  const res = await axios.get(`${ROOT_URL}/api/categories/${id}`);
 
   dispatch({ type: FETCH_CATEGORY, payload: res.data });
 };
 
 export const createCategory = (category, history) => async dispatch => {
-  const res = await axios.post(
-    'http://localhost:5000/api/categories',
-    category
-  );
+  const res = await axios.post(`${ROOT_URL}/api/categories`, category);
 
   history.push('/categories');
   dispatch({ type: CREATE_CATEGORY, payload: res.data });
@@ -35,7 +33,7 @@ export const createCategory = (category, history) => async dispatch => {
 
 export const updateCategory = (category, history) => async dispatch => {
   const res = await axios.put(
-    `http://localhost:5000/api/categories/${category.id}`,
+    `${ROOT_URL}/api/categories/${category.id}`,
     category
   );
 
@@ -44,7 +42,7 @@ export const updateCategory = (category, history) => async dispatch => {
 };
 
 export const deleteCategory = id => async dispatch => {
-  await axios.delete(`http://localhost:5000/api/categories/${id}`);
+  await axios.delete(`${ROOT_URL}/api/categories/${id}`);
 
   await dispatch({ type: DELETE_CATEGORY, payload: id });
 };

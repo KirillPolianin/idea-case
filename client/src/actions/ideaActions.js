@@ -1,5 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
+import { ROOT_URL } from './rootUrl';
 
 export const FETCH_IDEAS = 'fetch_ideas';
 export const FETCH_IDEA = 'fetch_idea';
@@ -13,13 +14,13 @@ export const newIdea = () => dispatch => {
 };
 
 export const fetchIdeas = () => async dispatch => {
-  const res = await axios.get('http://localhost:5000/api/ideas');
+  const res = await axios.get(`${ROOT_URL}/api/ideas`);
 
   dispatch({ type: FETCH_IDEAS, payload: res.data });
 };
 
 export const fetchIdea = id => async dispatch => {
-  const res = await axios.get(`http://localhost:5000/ideas/${id}`);
+  const res = await axios.get(`${ROOT_URL}/ideas/${id}`);
 
   dispatch({ type: FETCH_IDEA, payload: res.data });
 };
@@ -41,7 +42,7 @@ export const createIdea = (values, history) => async dispatch => {
     ...values,
     creationDate: creationDate
   };
-  const res = await axios.post('http://localhost:5000/api/ideas', idea);
+  const res = await axios.post(`${ROOT_URL}/api/ideas`, idea);
 
   history.push('/');
   dispatch({ type: CREATE_IDEA, payload: res.data });
@@ -50,17 +51,14 @@ export const createIdea = (values, history) => async dispatch => {
 export const updateIdea = (data, history) => async dispatch => {
   const idea = _.omit(data, ['lastModified', 'comments']);
 
-  const res = await axios.put(
-    `http://localhost:5000/api/ideas/${idea.id}`,
-    idea
-  );
+  const res = await axios.put(`${ROOT_URL}/api/ideas/${idea.id}`, idea);
 
   history.push('/');
   dispatch({ type: UPDATE_IDEA, payload: res.data });
 };
 
 export const deleteIdea = (id, history) => async dispatch => {
-  await axios.delete(`http://localhost:5000/api/ideas/${id}`);
+  await axios.delete(`${ROOT_URL}/api/ideas/${id}`);
 
   if (history) {
     history.push('/');
