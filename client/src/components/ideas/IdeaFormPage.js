@@ -6,7 +6,7 @@ import {
   createIdea,
   newIdea,
   updateIdea,
-  fetchIdeaUpdate
+  fetchIdea
 } from '../../actions/ideaActions';
 import { fetchCategories } from '../../actions/categoryActions';
 import IdeaForm from './IdeaForm';
@@ -15,7 +15,7 @@ class IdeaFormPage extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     if (id) {
-      this.props.fetchIdeaUpdate(id);
+      this.props.fetchIdea(id);
     } else {
       this.props.newIdea();
     }
@@ -57,6 +57,6 @@ export default connect(mapStateToProps, {
   createIdea,
   newIdea,
   updateIdea,
-  fetchIdeaUpdate,
+  fetchIdea,
   fetchCategories
 })(withRouter(IdeaFormPage));
