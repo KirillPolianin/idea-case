@@ -24,13 +24,13 @@ export const fetchIdea = id => async dispatch => {
   dispatch({ type: FETCH_IDEA, payload: res.data });
 };
 
-export const fetchIdeaUpdate = id => async dispatch => {
-  const res = await axios.get(`http://localhost:5000/api/ideas/${id}`);
-
-  const payload = _.omit(res.data, 'lastModified');
-
-  dispatch({ type: FETCH_IDEA, payload });
-};
+// export const fetchIdeaUpdate = id => async dispatch => {
+//   const res = await axios.get(`http://localhost:5000/api/ideas/${id}`);
+//
+//   const payload = _.omit(res.data, 'lastModified');
+//
+//   dispatch({ type: FETCH_IDEA, payload });
+// };
 
 export const createIdea = (values, history) => async dispatch => {
   const today = new Date();
@@ -47,7 +47,9 @@ export const createIdea = (values, history) => async dispatch => {
   dispatch({ type: CREATE_IDEA, payload: res.data });
 };
 
-export const updateIdea = (idea, history) => async dispatch => {
+export const updateIdea = (data, history) => async dispatch => {
+  const idea = _.omit(data, ['lastModified', 'comments']);
+
   const res = await axios.put(
     `http://localhost:5000/api/ideas/${idea.id}`,
     idea
