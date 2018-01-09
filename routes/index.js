@@ -67,3 +67,5 @@ module.exports = (app, table, plural) => {
     }
   });
 };
+
+/* hui */
